@@ -8,6 +8,7 @@ var firebaseConfig = {
     storageBucket: "ch2d-99336.appspot.com",
     messagingSenderId: "657338167280",
     appId: "1:657338167280:web:ea7ce3a9a5305f57ecb735"
+    measurementId: "G-B9J128R88S"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
