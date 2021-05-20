@@ -26,6 +26,7 @@ function save(){
     if(document.getElementById('div1').style.display == "block"){display()}
     var userId = document.getElementById('userId').value
     var temperature = document.getElementById('temperature').value
+    if(userId.length == 1){userId = "0" + userId}
     if(userId == "" || temperature == ""){
         alert("請輸入座號及今日體溫!!!")
     }
