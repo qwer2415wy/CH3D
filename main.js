@@ -86,7 +86,7 @@ function display(){
 function get(){
     clean()
     var userId = document.getElementById('userId').value
-    if(userId >= 0 && userId <= 34 && userId != '' && userId != 24){
+    if(userId >= 0 && userId <= 34 && userId != '' && userId != "24"){
         if(userId.length == 1){userId = "0" + userId}
         var end = Nowtime - StartTime + 1
         if(document.getElementById('div1').style.display != "block"){display()}
