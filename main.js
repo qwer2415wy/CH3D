@@ -31,40 +31,42 @@ function save(){
         alert("請輸入座號及今日體溫!!!")
     }
     else{
-        database.ref('DetailedRecords/' + Nowtime + '/' + userId ).once("value").then(function(snapshot){
-        var val = snapshot.val();
-        if(val == null){
-            if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != 24){
-                if(temperature > 37.5){
-                    database.ref('DetailedRecords/' + Nowtime + '/' + userId).set({
-                        Temperature : temperature ,
-                        Warning : 1 ,
-                        Date : Nowtime
-                        })
-                    database.ref('Records/' + Nowtime).child(userId).set(temperature)
+        if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
+            database.ref('DetailedRecords/' + Nowtime + '/' + userId ).once("value").then(function(snapshot){
+                var val = snapshot.val();
+                if(val == null){
+                    if(userId >= 0 && userId <= 35 && temperature > 30 && temperature < 45){
+                        if(temperature > 37.5){
+                            database.ref('DetailedRecords/' + Nowtime + '/' + userId).set({
+                                Temperature : temperature ,
+                                Warning : 1 ,
+                                Date : Nowtime
+                                })
+                            database.ref('Records/' + Nowtime).child(userId).set(temperature)
+                        }
+                        else{
+                            database.ref('DetailedRecords/' + Nowtime + '/' + userId).set({
+                                Temperature : temperature ,
+                                Warning : 0 ,
+                                Date : Nowtime
+                                })
+                            database.ref('Records/' + Nowtime).child(userId).set(temperature)
+                        }
+                        alert('體溫上傳成功')
+                        document.getElementById('temperature').value = ''
+                    }
                 }
                 else{
-                    database.ref('DetailedRecords/' + Nowtime + '/' + userId).set({
-                        Temperature : temperature ,
-                        Warning : 0 ,
-                        Date : Nowtime
-                        })
-                    database.ref('Records/' + Nowtime).child(userId).set(temperature)
+                    alert('今日體溫已回報完畢，不需要重複上傳')
+                    document.getElementById('temperature').value = ''
                 }
-                alert('體溫上傳成功')
-                document.getElementById('temperature').value = ''
-            }
-            else{
-                alert('座號或體溫輸入有誤')
-                document.getElementById('userId').value = ''
-                document.getElementById('temperature').value = ''
-            }
+            })
         }
         else{
-            alert('今日體溫已回報完畢，不需要重複上傳')
+            alert('座號或體溫輸入有誤')
+            document.getElementById('userId').value = ''
             document.getElementById('temperature').value = ''
         }
-        })
     }
 }
 
