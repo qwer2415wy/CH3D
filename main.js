@@ -42,7 +42,7 @@ function save(){
                                 Warning : 1 ,
                                 Date : Nowtime
                                 })
-                            database.ref('Records/' + Nowtime).child(userId).set(temperature)
+                            database.ref('Records/' + userId).child(Nowtime).set(temperature)
                         }
                         else{
                             database.ref('DetailedRecords/' + Nowtime + '/' + userId).set({
@@ -50,7 +50,7 @@ function save(){
                                 Warning : 0 ,
                                 Date : Nowtime
                                 })
-                            database.ref('Records/' + Nowtime).child(userId).set(temperature)
+                            database.ref('Records/' + userId).child(Nowtime).set(temperature)
                         }
                         alert('體溫上傳成功')
                         document.getElementById('temperature').value = ''
