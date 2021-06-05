@@ -12,6 +12,9 @@
 <body>
     <main>
         <form>
+            <label for="date">日期（格式範例：20210520）</label><br>
+            <label for="text">*補上傳專用，如要上傳今日體溫，該欄位不用填寫</label><br>
+            <input type="text" name="date" id="date" oninput="value=value.replace(/[^\d]/g,'')"><br>
             <label for="userId">座號</label><br>
             <input type="text" name="userId" id="userId" oninput="value=value.replace(/[^\d]/g,'')"><br>
             <label for="Temperature">今日體溫</label><br>

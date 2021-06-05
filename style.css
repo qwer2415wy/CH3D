@@ -13,14 +13,14 @@ main {
 }
 
 form {
-    width: 400px;
+    width: 425px;
     border: solid 1px #EBEBEB;
     padding: 5rem;
 }
 
 button {
     margin-top: 2rem;
-    margin-left: 1.5rem;
+    margin-left: 2rem;
 }
 
 .div1 {
