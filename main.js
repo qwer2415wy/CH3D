@@ -32,6 +32,7 @@ function save(){
     if(userId == "" || temperature == ""){
         alert("請輸入座號及今日體溫!!!")
     }
+    if(dateVal.length != 8){alert("請輸入符合規則的日期")}
     else{
         if(time.getDay() != 0 && time.getDay() != 6){
             if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
@@ -39,7 +40,7 @@ function save(){
                 database.ref('DetailedRecords/' + date + '/' + userId ).once("value").then(function(snapshot){
                     var val = snapshot.val();
                     if(val == null){
-                        if(userId >= 0 && userId <= 35 && temperature > 30 && temperature < 45){
+                        if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
                             if(temperature > 37.5){
                                 database.ref('DetailedRecords/' + date + '/' + userId).set({
                                     Temperature : temperature ,
@@ -97,7 +98,7 @@ function get(){
     clean()
     var dateVal = document.getElementById('date').value
     var userId = document.getElementById('userId').value
-    if(userId >= 0 && userId <= 35 && userId != ''){
+    if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
         if(userId.length == 1){userId = "0" + userId}
         if(document.getElementById('div1').style.display != "block"){display()}
         if(dateVal != ''){
