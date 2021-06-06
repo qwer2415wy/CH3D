@@ -32,7 +32,7 @@ function save(){
     if(userId == "" || temperature == ""){
         alert("請輸入座號及今日體溫!!!")
     }
-    if(dateVal.length != 8){alert("請輸入符合規則的日期")}
+    if(checkDate(dateVal) != true){alert("請輸入符合規則的日期")}
     else{
         if(time.getDay() != 0 && time.getDay() != 6){
             if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
@@ -76,6 +76,21 @@ function save(){
         else{
             alert('假日不能上傳體溫')
         }
+    }
+}
+
+//檢查日期
+function checkDate(dateP){
+    if(dateP.length == 8){
+        if(Number(dateP.slice(0,4)) > 2020 && Number(dateP.slice(4,6)) <= 12 && Number(dateP.slice(4,6)) > 0 && Number(dateP.slice(6,8)) <= 31 && Number(dateP.slice(6,8)) > 0){
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    else{
+        return false
     }
 }
 
