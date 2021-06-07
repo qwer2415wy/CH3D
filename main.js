@@ -32,59 +32,57 @@ function save(){
     if(userId == "" || temperature == ""){
         alert("請輸入座號及今日體溫!!!")
     }
+    if(checkDate(dateVal) != true){alert("請輸入符合規則的日期")}
     else{
-        if(checkDate(dateVal) != true){
-            alert("請輸入符合規則的日期")
-        }
-        else{
-            if(time.getDay() != 0 && time.getDay() != 6){
-                if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
-                    if(dateVal != ''){date = dateVal}
-                    database.ref('DetailedRecords/' + date + '/' + userId ).once("value").then(function(snapshot){
-                        var val = snapshot.val();
-                        if(val == null){
-                            if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
-                                if(temperature > 37.5){
-                                    database.ref('DetailedRecords/' + date + '/' + userId).set({
-                                        Temperature : temperature ,
-                                        Warning : 1 ,
-                                        Date : date
-                                        })
-                                    database.ref('Records/' + userId).child(date).set(temperature)
-                                }
-                                else{
-                                    database.ref('DetailedRecords/' + date + '/' + userId).set({
-                                        Temperature : temperature ,
-                                        Warning : 0 ,
-                                        Date : date
-                                        })
-                                    database.ref('Records/' + userId).child(date).set(temperature)
-                                }
-                                alert('體溫上傳成功')
-                                document.getElementById('temperature').value = ''
+        if(time.getDay() != 0 && time.getDay() != 6){
+            if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
+                if(dateVal != ''){date = dateVal}
+                database.ref('DetailedRecords/' + date + '/' + userId ).once("value").then(function(snapshot){
+                    var val = snapshot.val();
+                    if(val == null){
+                        if(userId >= 0 && userId <= 34 && temperature > 30 && temperature < 45 && userId != "24"){
+                            if(temperature > 37.5){
+                                database.ref('DetailedRecords/' + date + '/' + userId).set({
+                                    Temperature : temperature ,
+                                    Warning : 1 ,
+                                    Date : date
+                                    })
+                                database.ref('Records/' + userId).child(date).set(temperature)
                             }
-                        }
-                        else{
-                            alert('體溫已回報完畢，不需要重複上傳')
+                            else{
+                                database.ref('DetailedRecords/' + date + '/' + userId).set({
+                                    Temperature : temperature ,
+                                    Warning : 0 ,
+                                    Date : date
+                                    })
+                                database.ref('Records/' + userId).child(date).set(temperature)
+                            }
+                            alert('體溫上傳成功')
                             document.getElementById('temperature').value = ''
                         }
-                    })
-                }
-                else{
-                    alert('座號或體溫輸入有誤')
-                    document.getElementById('userId').value = ''
-                    document.getElementById('temperature').value = ''
-                }
+                    }
+                    else{
+                        alert('體溫已回報完畢，不需要重複上傳')
+                        document.getElementById('temperature').value = ''
+                    }
+                })
             }
-            else{alert('假日不能上傳體溫')}
+            else{
+                alert('座號或體溫輸入有誤')
+                document.getElementById('userId').value = ''
+                document.getElementById('temperature').value = ''
+            }
+        }
+        else{
+            alert('假日不能上傳體溫')
         }
     }
 }
 
 //檢查日期
 function checkDate(dateP){
-    if(dateP.length == 8){
-        if(Number(dateP.slice(0,4)) > 2020 && Number(dateP.slice(4,6)) <= 12 && Number(dateP.slice(4,6)) > 0 && Number(dateP.slice(6,8)) <= 31 && Number(dateP.slice(6,8)) > 0){
+    if(dateP.length == 8 || Number == null){
+        if(Number(dateP.slice(0,4)) > 2020 && Number(dateP.slice(4,6)) <= 12 && Number(dateP.slice(4,6)) > 0 && Number(dateP.slice(6,8)) <= 31 && Number(dateP.slice(6,8)) > 0 || Number == null){
             return true
         }
         else{
