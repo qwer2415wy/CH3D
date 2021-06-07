@@ -81,8 +81,11 @@ function save(){
 
 //檢查日期
 function checkDate(dateP){
-    if(dateP.length == 8 || Number == null){
-        if(Number(dateP.slice(0,4)) > 2020 && Number(dateP.slice(4,6)) <= 12 && Number(dateP.slice(4,6)) > 0 && Number(dateP.slice(6,8)) <= 31 && Number(dateP.slice(6,8)) > 0 || Number == null){
+    if(dateP.length == 0){
+        return true
+    }
+    else if(dateP.length == 8){
+        if(Number(dateP.slice(0,4)) > 2020 && Number(dateP.slice(4,6)) <= 12 && Number(dateP.slice(4,6)) > 0 && Number(dateP.slice(6,8)) <= 31 && Number(dateP.slice(6,8)) > 0){
             return true
         }
         else{
